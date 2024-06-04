@@ -1,0 +1,22 @@
+name: Lint
+
+on: # event list
+  pull_request: # on a pull request to each of these branches
+    branches:
+      - main
+
+jobs: # list of things to do
+  linting:
+    name: Linting # job name (unique id)
+    runs-on: ubuntu-latest # on which machine to run
+    steps: # list of steps
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v1
+      - name: Install Backend Dependencies
+        run: bun install
+      - name: Backend Code Linting
+        run: bun run lint
+      - name: Install Frontend Dependencies
+        run: cd frontend && bun install
+      - name: Frontend Code Linting
+        run: cd frontend && bun run lint

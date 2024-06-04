@@ -1,0 +1,32 @@
+# fly.toml app configuration file generated for konec-solution-helper on 2024-05-10T15:07:27+10:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = 'konec-solution-helper'
+primary_region = 'syd'
+
+[build]
+
+[http_service]
+  internal_port = 3000
+  force_https = true
+  auto_stop_machines = false
+  auto_start_machines = false
+  processes = ['app']
+
+[[vm]]
+  memory = '1gb'
+  cpu_kind = 'shared'
+  cpus = 1
+
+[checks]
+  [checks.backend_health_check]
+    grace_period = "30s"
+    interval = "15s"
+    method = "get"
+    path = "/api/healthcheck"
+    port = 3000
+    timeout = "10s"
+    type = "http"
+

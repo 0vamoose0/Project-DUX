@@ -1,0 +1,55 @@
+query getAllProducts {
+  allProduct {
+    _id
+    name
+    sku
+    image {
+      asset {
+        url
+      }
+    }
+    msrp
+    level1Category {
+      _id
+      name
+    }
+    tier1Pricing
+    tier2Pricing
+  }
+}
+
+query getProductByName($name: String!) {
+  allProduct(where: { name: { matches: $name } }) {
+    _id
+    name
+    sku
+    image {
+      asset {
+        url
+      }
+    }
+    msrp
+    level1Category {
+      _id
+      name
+    }
+    tier1Pricing
+    tier2Pricing
+  }
+}
+
+query getAllCategory {
+    allProductLevel1Category {
+      name
+      description
+      image{ 
+      asset {
+          url
+      }}
+ 
+      slug {
+        current
+        source
+      }
+      }
+  }
